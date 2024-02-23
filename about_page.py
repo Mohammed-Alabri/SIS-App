@@ -1,0 +1,22 @@
+import flet as ft
+
+
+def about_page(page: ft.Page):
+    view = ft.View()
+    view.route = '/about'
+    view.controls.append(ft.AppBar(title=ft.Text(
+        "About"), bgcolor=ft.colors.SURFACE_VARIANT))
+
+    view.controls.append(ft.Row([ft.OutlinedButton("Twitter: @3Mohammed21",
+                                                   on_click=lambda _: page.launch_url(
+                                                       "https://twitter.com/3Mohammed21"))],
+                                alignment=ft.MainAxisAlignment.CENTER))
+    view.controls.append(ft.Row([ft.OutlinedButton("Instagram: @thematrex_007",
+                                                   on_click=lambda _: page.launch_url(
+                                                       "https://www.instagram.com/thematrex_007/"))],
+                                alignment=ft.MainAxisAlignment.CENTER))
+    view.controls.append(ft.Row([ft.OutlinedButton("Github: Mohammed-Alabri",
+                                                   on_click=lambda _: page.launch_url(
+                                                       "https://github.com/Mohammed-Alabri"))],
+                                alignment=ft.MainAxisAlignment.CENTER))
+    return view

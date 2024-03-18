@@ -5,6 +5,7 @@ from timetable_page import timetable_page
 from grades_page import grades_page
 from registredCourses_page import registeredCourses_page
 from about_page import about_page
+from GPAcalc_page import GPAcalc_page
 
 
 def main(page: ft.Page):
@@ -12,7 +13,7 @@ def main(page: ft.Page):
     if not page.client_storage.contains_key("lang"):
         page.client_storage.set("lang", "ar")
     page.theme_mode = page.client_storage.get(
-        "theme") if page.client_storage.contains_key("theme") else ()
+        "theme") if page.client_storage.contains_key("theme") else page.theme_mode
 
     def route_change(route):
         page.views.clear()
@@ -24,6 +25,8 @@ def main(page: ft.Page):
                 page.views.append(timetable_page(page))
             if page.route == '/grades':
                 page.views.append(grades_page(page))
+            if page.route == '/GPAcalc':
+                page.views.append(GPAcalc_page(page))
             if page.route == '/registered-courses':
                 page.views.append(registeredCourses_page(page))
             if page.route == '/about':

@@ -57,13 +57,24 @@ class SISSession:
             req = self.session_sis.get(url)
         return req
 
+    def change_language(self, lang):
+        # table_page = self.session_portal.get("https://portal.squ.edu.om")
+        # doc = BeautifulSoup(table_page.text, 'html.parser')
+        # set_lang = doc.find("a", {'class': 'taglib-language-list-text'}).text
+        if lang == "ar":
+            self.session_portal.get(
+                "https://portal.squ.edu.om/web/guest/home?p_p_id=82&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&_82_struts_action=%2Flanguage%2Fview&_82_redirect=%2Fweb%2Fguest%2Fhome&_82_languageId=ar_SA")
+        elif lang == "en":
+            self.session_portal.get(
+                "https://portal.squ.edu.om/web/guest/home?p_p_id=82&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&_82_struts_action=%2Flanguage%2Fview&_82_redirect=%2Fweb%2Fguest%2Fhome&_82_languageId=en_US")
+
     def get_name(self):
         reg_page = self.get("https://sis.squ.edu.om/sis/webreg/reg.jsp")
         doc = BeautifulSoup(reg_page.text, 'html.parser')
         name = doc.find("tr").find_all("td")[1].text
         return name
 
-    def get_data(self):
+    def get_data_en(self):
         table_page = self.get(
             "https://sis.squ.edu.om/sis/webreg/timetable.jsp?type=N")
         doc = BeautifulSoup(table_page.text, 'html.parser')
@@ -79,6 +90,22 @@ class SISSession:
                 if last == 'College' or last == 'Major':
                     dic[last] = data[0]
         return dic
+
+    def get_data(self):
+        table_page = self.session_portal.get(
+            "https://portal.squ.edu.om/transcripts")
+        doc = BeautifulSoup(table_page.text, 'html.parser')
+
+        name = doc.find("div", {'class': 'col-sm-5'}).text
+
+        major, adivor = [x.text for x in doc.find_all(
+            "div", {'class': 'col-sm-6'})[-2:]]
+        result = {
+            'Name': name,
+            'Advisor': adivor,
+            'Major': major
+        }
+        return result
 
     def get_timetable(self):
         my_table = []
@@ -129,3 +156,15 @@ class SISSession:
             doc.find("table", id='stdCrsListTable').find_all("tr")]
 
         return table
+
+    def get_points(self):
+        table_page = self.session_portal.get(
+            "https://portal.squ.edu.om/gpa-calculation")
+        doc = BeautifulSoup(table_page.text, 'html.parser')
+        gpa = doc.find('input', {'name': 'AGPA'})['value']
+        earned_credit = doc.find('input', {'name': 'creditsEarn'})['value']
+        points = doc.find('input', {'name': 'points'})['value']
+
+        return {'GPA': gpa,
+                'credit': earned_credit,
+                'points': points}

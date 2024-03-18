@@ -7,6 +7,7 @@ def timetable_page(page: ft.Page):
     view.controls.append(ft.AppBar(title=ft.Text("Timetable"), bgcolor=ft.colors.SURFACE_VARIANT))
     coll = ft.Column()
     view.controls.append(ft.Row(controls=[coll], alignment=ft.MainAxisAlignment.CENTER, scroll=ft.ScrollMode.HIDDEN))
+    table: list
     table = page.session.get("ses").get_timetable()
     cols = []
     for i in table[0]:

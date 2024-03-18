@@ -7,6 +7,7 @@ def grades_page(page: ft.Page):
     view.route = '/grades'
     view.scroll = ft.ScrollMode.AUTO
     view.controls.append(ft.AppBar(title=ft.Text("Grades"), bgcolor=ft.colors.SURFACE_VARIANT))
+    grades: list
     grades = page.session.get("ses").get_grades()
 
     for table in grades:

@@ -61,9 +61,11 @@ def login_page(page: ft.Page):
         if not s.login_sis():
             dlg_open("ERROR", "Username or password is incorrect.")
             return False
-        page.session.set("data", s.get_data())
+        lang = page.client_storage.get("lang")
         page.session.set("ses", s)
         page.client_storage.set("uspass", [username, password])
+        s.change_language(lang)
+        page.session.set("data", s.get_data())
         dlg_wait_close()
         page.go('/')
         return True

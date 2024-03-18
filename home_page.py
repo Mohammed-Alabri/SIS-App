@@ -6,15 +6,17 @@ from langauge import words
 def home_page(page: ft.Page):
     view = ft.View()
     view.route = '/'
+    ses: SISSession
+    ses = page.session.get("ses")
     lang = page.client_storage.get("lang")
     view.controls.append(ft.AppBar(title=ft.Text(
         "Home"), bgcolor=ft.colors.SURFACE_VARIANT))
     user_data = page.session.get("data")
-    view.controls.append(ft.Row([ft.Text("welcome " + user_data['Name'], text_align=ft.TextAlign.CENTER)],
+    view.controls.append(ft.Row([ft.Text(words[lang]['welcome'] + user_data['Name'], text_align=ft.TextAlign.CENTER)],
                                 alignment=ft.MainAxisAlignment.CENTER))
-    view.controls.append(ft.Row([ft.Text("Advisor: " + user_data['Advisor'], text_align=ft.TextAlign.CENTER)],
+    view.controls.append(ft.Row([ft.Text(words[lang]['advisor'] + user_data['Advisor'], text_align=ft.TextAlign.CENTER)],
                                 alignment=ft.MainAxisAlignment.CENTER))
-    view.controls.append(ft.Row([ft.Text("Major: " + user_data['Major'], text_align=ft.TextAlign.CENTER)],
+    view.controls.append(ft.Row([ft.Text(words[lang]['major'] + user_data['Major'], text_align=ft.TextAlign.CENTER)],
                                 alignment=ft.MainAxisAlignment.CENTER))
 
     def dlg_close(e):
@@ -50,6 +52,9 @@ def home_page(page: ft.Page):
         ft.Row(controls=[ft.ElevatedButton(text=words[lang]['gr'], on_click=lambda _: clicked_fuse('/grades'))],
                alignment=ft.MainAxisAlignment.CENTER))
     view.controls.append(
+        ft.Row(controls=[ft.ElevatedButton(text='GPA', on_click=lambda _: page.go('/GPAcalc'))],
+               alignment=ft.MainAxisAlignment.CENTER))
+    view.controls.append(
         ft.Row(controls=[ft.ElevatedButton(text=words[lang]['LogOut'], on_click=lambda _: clicked_fuse('/login'))],
                alignment=ft.MainAxisAlignment.CENTER))
 
@@ -66,6 +71,8 @@ def home_page(page: ft.Page):
             page.client_storage.set('lang', 'en')
         else:
             page.client_storage.set('lang', 'ar')
+        ses.change_language(page.client_storage.get('lang'))
+        page.session.set("data", ses.get_data())
         page.go(f"/{page.client_storage.get('lang')}")
     view.controls.append(ft.Divider())
     view.controls.append(

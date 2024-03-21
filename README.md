@@ -1,7 +1,7 @@
 # SIS app
 Program provide some portal and SIS services built using pure python using following libraries:
 * Flet: User interface.
-* Requests: comunication with websites.
+* Requests: HTTP requests.
 * BeautifulSoup4: Scraping websites data.
 
 # Services

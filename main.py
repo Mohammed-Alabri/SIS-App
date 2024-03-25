@@ -21,7 +21,7 @@ def main(page: ft.Page):
             page.views.append(login_page(page))
         else:
             page.views.append(home_page(page))
-            if page.route == "/timetable":
+            if page.route in ["/timetable", "/timetableR", "/timetableN"]:
                 page.views.append(timetable_page(page))
             if page.route == '/grades':
                 page.views.append(grades_page(page))

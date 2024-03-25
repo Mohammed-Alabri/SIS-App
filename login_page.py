@@ -81,9 +81,9 @@ def login_page(page: ft.Page):
     view.controls += [username_box, password_box,
                       ft.Row(controls=[login_btn], alignment=ft.MainAxisAlignment.CENTER)]
 
-    view.controls.append(ft.Row([ft.OutlinedButton("Github: Mohammed-Alabri",
+    view.controls.append(ft.Row([ft.OutlinedButton("Github: SIS-App",
                                                    on_click=lambda _: page.launch_url(
-                                                       "https://github.com/Mohammed-Alabri"))],
+                                                       "https://github.com/Mohammed-Alabri/SIS-App"))],
                                 alignment=ft.MainAxisAlignment.CENTER))
     view.vertical_alignment = 'center'
     return view

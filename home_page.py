@@ -52,7 +52,7 @@ def home_page(page: ft.Page):
         ft.Row(controls=[ft.ElevatedButton(text=words[lang]['gr'], on_click=lambda _: clicked_fuse('/grades'))],
                alignment=ft.MainAxisAlignment.CENTER))
     view.controls.append(
-        ft.Row(controls=[ft.ElevatedButton(text='GPA', on_click=lambda _: page.go('/GPAcalc'))],
+        ft.Row(controls=[ft.ElevatedButton(text=words[lang]['GPA'], on_click=lambda _: page.go('/GPAcalc'))],
                alignment=ft.MainAxisAlignment.CENTER))
     view.controls.append(
         ft.Row(controls=[ft.ElevatedButton(text=words[lang]['LogOut'], on_click=lambda _: clicked_fuse('/login'))],

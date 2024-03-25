@@ -50,7 +50,7 @@ class CourseGrade(ft.UserControl):
         cols = [ft.DataColumn(ft.Text(words[self.lang]["Course Code"])),
                 ft.DataColumn(ft.Text(words[self.lang]["Credits"])),
                 ft.DataColumn(ft.Text(words[self.lang]["Grade"]))]
-        self.table = ft.DataTable(columns=reversed(cols) if self.lang == "ar" else cols,
+        self.table = ft.DataTable(columns=cols,
                                   data_row_max_height=60
                                   )
         self.grades_list = {
@@ -81,8 +81,7 @@ class CourseGrade(ft.UserControl):
             total_credits += cr
             summ += self.grades_list[gr.value] * cr
         self.gpa_text.value = round(summ / total_credits, 2)
-        if len(self.page.views) == 2:
-            self.update()
+        self.update()
 
     def add_row(self, crscd: str, credit: int):
         dropdown = ft.Dropdown(options=[ft.dropdown.Option(gr)
@@ -92,4 +91,4 @@ class CourseGrade(ft.UserControl):
         row = [ft.DataCell(ft.Text(crscd)),
                ft.DataCell(ft.Text(str(credit))),
                ft.DataCell(dropdown)]
-        self.table.rows.append(ft.DataRow(reversed(row) if self.lang == "ar" else row))
+        self.table.rows.append(ft.DataRow(row))

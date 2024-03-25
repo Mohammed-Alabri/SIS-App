@@ -107,10 +107,10 @@ class SISSession:
         }
         return result
 
-    def get_timetable(self):
+    def get_timetable(self, typee):
         my_table = []
         table_page = self.get(
-            "https://sis.squ.edu.om/sis/webreg/timetable.jsp?type=N")
+            f"https://sis.squ.edu.om/sis/webreg/timetable.jsp?type={typee}")
         doc = BeautifulSoup(table_page.text, 'html.parser')
         table = doc.find_all("table")[2]
         days = []

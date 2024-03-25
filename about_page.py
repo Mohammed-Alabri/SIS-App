@@ -18,8 +18,8 @@ def about_page(page: ft.Page):
                                                    on_click=lambda _: page.launch_url(
                                                        "https://www.instagram.com/thematrex_007/"))],
                                 alignment=ft.MainAxisAlignment.CENTER))
-    view.controls.append(ft.Row([ft.OutlinedButton("Github: Mohammed-Alabri",
+    view.controls.append(ft.Row([ft.OutlinedButton("Github: SIS-App",
                                                    on_click=lambda _: page.launch_url(
-                                                       "https://github.com/Mohammed-Alabri"))],
+                                                       "https://github.com/Mohammed-Alabri/SIS-App"))],
                                 alignment=ft.MainAxisAlignment.CENTER))
     return view

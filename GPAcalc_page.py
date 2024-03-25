@@ -18,5 +18,4 @@ def GPAcalc_page(page: ft.Page):
         table.add_row(course[0], course[3])
     view.controls.append(table)
     table.calc_grade(1)
-    page.update()
     return view
